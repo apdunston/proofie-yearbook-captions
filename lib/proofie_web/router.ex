@@ -19,10 +19,6 @@ defmodule ProofieWeb.Router do
 
   scope "/", ProofieWeb do
     pipe_through :browser
-
-    live "/", DashboardLive, :index
-    live "/tools/algorithmic-checker", AlgorithmicCheckerLive, :index
-    live "/tools/ai-checker", AiCheckerLive, :index
   end
 
   # Other scopes may use custom stacks.
@@ -55,6 +51,9 @@ defmodule ProofieWeb.Router do
     live_session :require_authenticated_user,
       on_mount: [{ProofieWeb.UserAuth, :require_authenticated}] do
       live "/users/settings", UserLive.Settings, :edit
+      live "/", DashboardLive, :index
+      live "/tools/algorithmic-checker", AlgorithmicCheckerLive, :index
+      live "/tools/ai-checker", AiCheckerLive, :index
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
     end
 
