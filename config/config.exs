@@ -70,6 +70,12 @@ config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configure OpenAI\
+config :proofie, :openai,
+  api_key: System.get_env("OPENAI_API_KEY"),
+  organization: System.get_env("OPENAI_ORGANIZATION"),
+  model: "gpt-3.5-turbo"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
