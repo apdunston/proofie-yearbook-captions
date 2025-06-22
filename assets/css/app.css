@@ -1,59 +1,11 @@
-/* See the Tailwind configuration guide for advanced usage
-   https://tailwindcss.com/docs/configuration */
-
 @import "tailwindcss" source(none);
 @source "../css";
 @source "../js";
 @source "../../lib/proofie_web";
 
-/* A Tailwind plugin that makes "hero-#{ICON}" classes available.
-   The heroicons installation itself is managed by your mix.exs */
 @plugin "../vendor/heroicons";
-
-/* daisyUI Tailwind Plugin. You can update this file by fetching the latest version with:
-   curl -sLO https://github.com/saadeghi/daisyui/releases/latest/download/daisyui.js
-   Make sure to look at the daisyUI changelog: https://daisyui.com/docs/changelog/ */
 @plugin "../vendor/daisyui" {
   themes: false;
-}
-
-/* daisyUI theme plugin. You can update this file by fetching the latest version with:
-  curl -sLO https://github.com/saadeghi/daisyui/releases/latest/download/daisyui-theme.js
-  We ship with two themes, a light one inspired on Phoenix colors and a dark one inspired
-  on Elixir colors. Build your own at: https://daisyui.com/theme-generator/ */
-@plugin "../vendor/daisyui-theme" {
-  name: "dark";
-  default: false;
-  prefersdark: true;
-  color-scheme: "dark";
-  --color-base-100: oklch(30.33% 0.016 252.42);
-  --color-base-200: oklch(25.26% 0.014 253.1);
-  --color-base-300: oklch(20.15% 0.012 254.09);
-  --color-base-content: oklch(97.807% 0.029 256.847);
-  --color-primary: oklch(58% 0.233 277.117);
-  --color-primary-content: oklch(96% 0.018 272.314);
-  --color-secondary: oklch(58% 0.233 277.117);
-  --color-secondary-content: oklch(96% 0.018 272.314);
-  --color-accent: oklch(60% 0.25 292.717);
-  --color-accent-content: oklch(96% 0.016 293.756);
-  --color-neutral: oklch(37% 0.044 257.287);
-  --color-neutral-content: oklch(98% 0.003 247.858);
-  --color-info: oklch(58% 0.158 241.966);
-  --color-info-content: oklch(97% 0.013 236.62);
-  --color-success: oklch(60% 0.118 184.704);
-  --color-success-content: oklch(98% 0.014 180.72);
-  --color-warning: oklch(66% 0.179 58.318);
-  --color-warning-content: oklch(98% 0.022 95.277);
-  --color-error: oklch(58% 0.253 17.585);
-  --color-error-content: oklch(96% 0.015 12.422);
-  --radius-selector: 0.25rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.21875rem;
-  --size-field: 0.21875rem;
-  --border: 1.5px;
-  --depth: 1;
-  --noise: 0;
 }
 
 @plugin "../vendor/daisyui-theme" {
@@ -62,41 +14,342 @@
   prefersdark: false;
   color-scheme: "light";
   --color-base-100: oklch(98% 0 0);
-  --color-base-200: oklch(96% 0.001 286.375);
-  --color-base-300: oklch(92% 0.004 286.32);
-  --color-base-content: oklch(21% 0.006 285.885);
   --color-primary: oklch(70% 0.213 47.604);
-  --color-primary-content: oklch(98% 0.016 73.684);
-  --color-secondary: oklch(55% 0.027 264.364);
-  --color-secondary-content: oklch(98% 0.002 247.839);
-  --color-accent: oklch(0% 0 0);
-  --color-accent-content: oklch(100% 0 0);
-  --color-neutral: oklch(44% 0.017 285.786);
-  --color-neutral-content: oklch(98% 0 0);
-  --color-info: oklch(62% 0.214 259.815);
-  --color-info-content: oklch(97% 0.014 254.604);
-  --color-success: oklch(70% 0.14 182.503);
-  --color-success-content: oklch(98% 0.014 180.72);
-  --color-warning: oklch(66% 0.179 58.318);
-  --color-warning-content: oklch(98% 0.022 95.277);
-  --color-error: oklch(58% 0.253 17.585);
-  --color-error-content: oklch(96% 0.015 12.422);
-  --radius-selector: 0.25rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.21875rem;
-  --size-field: 0.21875rem;
-  --border: 1.5px;
-  --depth: 1;
-  --noise: 0;
+  --color-secondary: oklch(65% 0.15 195.319);
+  --color-accent: oklch(75% 0.18 85.32);
+  --color-neutral: oklch(35% 0.05 264.84);
+  --color-base-200: oklch(95% 0.01 47.604);
+  --color-base-300: oklch(91% 0.02 47.604);
+  --color-info: oklch(70% 0.15 240);
+  --color-success: oklch(70% 0.15 160);
+  --color-warning: oklch(80% 0.15 60);
+  --color-error: oklch(65% 0.18 27.33);
+  --rounded-box: 1rem;
+  --rounded-btn: 0.5rem;
+  --rounded-badge: 1.9rem;
+  --animation-btn: 0.25s;
+  --animation-input: 0.2s;
+  --btn-focus-scale: 0.95;
+  --border-btn: 1px;
+  --tab-border: 1px;
+  --tab-radius: 0.5rem;
 }
 
-/* Add variants based on LiveView classes */
-@custom-variant phx-click-loading (.phx-click-loading&, .phx-click-loading &);
-@custom-variant phx-submit-loading (.phx-submit-loading&, .phx-submit-loading &);
-@custom-variant phx-change-loading (.phx-change-loading&, .phx-change-loading &);
+/* Custom Yearbook Enhancements */
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc6 100%);
+  min-height: 100vh;
+  position: relative;
+}
 
-/* Make LiveView wrapper divs transparent for layout */
-[data-phx-session] { display: contents }
+/* Scrapbook texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(139, 69, 19, 0.05) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(160, 82, 45, 0.05) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(205, 133, 63, 0.03) 1px,
+      transparent 1px
+    );
+  background-size:
+    50px 50px,
+    75px 75px,
+    25px 25px;
+  pointer-events: none;
+  z-index: -1;
+}
 
-/* This file is for your main application CSS */
+/* Enhanced polaroid-style cards */
+.polaroid-card {
+  background: linear-gradient(145deg, #ffffff, #f8f5f0);
+  border: 3px solid #d4af37;
+  border-radius: 15px;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.polaroid-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #d4af37, #f4e4bc, #d4af37);
+  border-radius: 18px;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.polaroid-card:hover {
+  transform: translateY(-5px) rotate(0.5deg);
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Vintage photo frame effects */
+.photo-frame {
+  background: white;
+  padding: 20px 20px 60px 20px;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    inset 0 0 20px rgba(139, 69, 19, 0.1);
+  transform: rotate(-1deg);
+  margin: 20px;
+  position: relative;
+  border: 1px solid #e8dcc6;
+}
+
+.photo-frame:nth-child(even) {
+  transform: rotate(1.5deg);
+}
+
+.photo-frame::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 40px;
+  height: 20px;
+  background: rgba(139, 69, 19, 0.1);
+  border-radius: 0 0 5px 0;
+  transform: skew(-10deg);
+}
+
+/* Enhanced tool tiles */
+.tool-tile {
+  background: linear-gradient(145deg, #ffffff, #f8f5f0);
+  border: 4px solid #d4af37;
+  border-radius: 20px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-tile::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s;
+  opacity: 0;
+}
+
+.tool-tile:hover::before {
+  opacity: 1;
+  transform: rotate(45deg) translate(50%, 50%);
+}
+
+.tool-tile:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.25),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  border-color: #e6c76f;
+}
+
+.tool-tile.coming-soon {
+  opacity: 0.7;
+  background: linear-gradient(145deg, #f0f0f0, #e8e8e8);
+  border-color: #999;
+}
+
+.tool-tile.coming-soon:hover {
+  transform: translateY(-3px);
+  opacity: 0.8;
+}
+
+/* Vintage paper texture for forms */
+.vintage-paper {
+  background:
+    linear-gradient(
+      90deg,
+      transparent 79px,
+      #d4af37 79px,
+      #d4af37 81px,
+      transparent 81px
+    ),
+    linear-gradient(#f8f5f0 0px, #f8f5f0 24px, #e8dcc6 25px);
+  background-size: 100% 25px;
+  position: relative;
+}
+
+.vintage-paper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(139, 69, 19, 0.02) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(160, 82, 45, 0.02) 1px,
+      transparent 1px
+    );
+  background-size:
+    20px 20px,
+    30px 30px;
+  pointer-events: none;
+}
+
+/* Enhanced typography */
+.yearbook-heading {
+  font-family: "Georgia", serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #8b4513, #d2691e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.yearbook-heading::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  border-radius: 1px;
+}
+
+/* Animated elements */
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+}
+
+.float-animation {
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+/* Enhanced form styling */
+.yearbook-input {
+  background: linear-gradient(145deg, #fff, #f8f5f0);
+  border: 2px solid #d4af37;
+  border-radius: 12px;
+  box-shadow:
+    inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+    0 2px 5px rgba(212, 175, 55, 0.2);
+  transition: all 0.3s ease;
+  font-family: "Georgia", serif;
+}
+
+.yearbook-input:focus {
+  border-color: #e6c76f;
+  box-shadow:
+    inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+    0 0 15px rgba(212, 175, 55, 0.3);
+  background: #fff;
+}
+
+/* Memory book tabs effect */
+.memory-tabs {
+  position: relative;
+}
+
+.memory-tabs::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  width: 60px;
+  height: 15px;
+  background: #d4af37;
+  border-radius: 8px 8px 0 0;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Vintage button styling */
+.vintage-button {
+  background: linear-gradient(145deg, #d4af37, #b8941f);
+  border: 2px solid #8b7419;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vintage-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.vintage-button:hover::before {
+  left: 100%;
+}
+
+.vintage-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.vintage-button:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
