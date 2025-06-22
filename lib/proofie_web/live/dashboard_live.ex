@@ -2,114 +2,118 @@ defmodule ProofieWeb.DashboardLive do
   use ProofieWeb, :live_view
 
   def mount(_params, _session, socket) do
-    # Define our available tools and coming soon features
-    active_tools = [
-      %{
-        id: :algorithmic_checker,
-        name: "Algorithmic Caption Checker",
-        description: "Fast, rules-based detection of common caption errors",
-        icon: "📝",
-        route: "/tools/algorithmic-checker",
-        status: :active
-      },
-      %{
-        id: :ai_checker,
-        name: "AI Caption Checker",
-        description: "Smart AI-powered style and content analysis",
-        icon: "🤖",
-        route: "/tools/ai-checker",
-        status: :active
-      }
-    ]
-
-    coming_soon_tools = [
-      %{
-        id: :photo_organizer,
-        name: "Photo Organizer",
-        description: "Organize and categorize yearbook photos",
-        icon: "📸",
-        status: :coming_soon
-      },
-      %{
-        id: :quote_verifier,
-        name: "Quote Verifier",
-        description: "Verify student quotes and attributions",
-        icon: "💬",
-        status: :coming_soon
-      },
-      %{
-        id: :style_guide,
-        name: "Style Guide Checker",
-        description: "Ensure consistent formatting and style",
-        icon: "📋",
-        status: :coming_soon
-      },
-      %{
-        id: :deadline_tracker,
-        name: "Deadline Tracker",
-        description: "Track submission deadlines and progress",
-        icon: "⏰",
-        status: :coming_soon
-      }
-    ]
-
     {:ok,
      socket
-     |> assign(:active_tools, active_tools)
-     |> assign(:coming_soon_tools, coming_soon_tools)
      |> assign(:page_title, "Dashboard")}
   end
 
-  def handle_event("navigate_to_tool", %{"route" => route}, socket) do
-    {:noreply, push_navigate(socket, to: route)}
+  def handle_event("navigate_to_tool", %{"tool" => tool}, socket) do
+    case tool do
+      "ai-checker" ->
+        {:noreply, push_navigate(socket, to: "/tools/ai-checker")}
+
+      _ ->
+        {:noreply, socket}
+    end
   end
 
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <div class="min-h-screen p-8 bg-gradient-to-br from-yellow-50 to-blue-100">
-        <!-- Header with yearbook aesthetic -->
-        <div class="text-center mb-12">
-          <div class="inline-block bg-white p-8 rounded-lg shadow-lg transform -rotate-1 border-4 border-yellow-400">
-            <h1 class="text-5xl font-bold text-blue-900 mb-2 font-serif">Proofie</h1>
-            <p class="text-xl text-blue-800 italic">Yearbook Caption Analysis Tools</p>
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="inline-block bg-white p-6 rounded-lg shadow-lg transform -rotate-1 border-4 border-yellow-400">
+            <h1 class="text-4xl font-bold text-blue-900 mb-2 font-serif">📚 Proofie Dashboard</h1>
+            <p class="text-lg text-blue-800">Your yearbook caption analysis toolkit</p>
           </div>
         </div>
-        
-    <!-- Tool Dashboard -->
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          
-    <!-- Active Tools -->
-          <%= for tool <- @active_tools do %>
-            <div
-              class="bg-gradient-to-br from-white to-amber-50 border-4 border-yellow-500 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
-              phx-click="navigate_to_tool"
-              phx-value-route={tool.route}
-            >
-              <div class="text-center">
-                <div class="text-4xl mb-4">{tool.icon}</div>
-                <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">{tool.name}</h3>
-                <p class="text-blue-800 mb-4">{tool.description}</p>
-                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                  Active
+
+        <div class="max-w-6xl mx-auto">
+          <!-- Active Tools -->
+          <div class="mb-12">
+            <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center font-serif">
+              🛠️ Active Tools
+            </h2>
+            <div class="grid md:grid-cols-1 gap-6 max-w-md mx-auto">
+              <!-- AI Caption Checker -->
+              <div class="group bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-rotate-1">
+                <div class="text-center">
+                  <div class="text-4xl mb-3">🤖</div>
+                  <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">AI Caption Checker</h3>
+                  <p class="text-blue-700 mb-4">
+                    Intelligent analysis powered by GPT-4.1 for comprehensive caption feedback
+                  </p>
+                  <button
+                    phx-click="navigate_to_tool"
+                    phx-value-tool="ai-checker"
+                    class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold group-hover:bg-yellow-500"
+                  >
+                    Launch AI Checker
+                  </button>
                 </div>
               </div>
             </div>
-          <% end %>
+          </div>
           
     <!-- Coming Soon Tools -->
-          <%= for tool <- @coming_soon_tools do %>
-            <div class="bg-gradient-to-br from-gray-100 to-gray-200 border-4 border-gray-300 rounded-xl p-6 shadow-lg opacity-60">
-              <div class="text-center">
-                <div class="text-4xl mb-4">{tool.icon}</div>
-                <h3 class="text-xl font-bold text-gray-600 mb-2 font-serif">{tool.name}</h3>
-                <p class="text-gray-500 mb-4">{tool.description}</p>
-                <div class="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-sm font-semibold">
-                  Coming Soon
+          <div>
+            <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center font-serif">
+              🚀 Coming Soon
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+              <!-- Photo Caption Generator -->
+              <div class="bg-white rounded-xl shadow-lg border-4 border-gray-300 p-6 opacity-75">
+                <div class="text-center">
+                  <div class="text-4xl mb-3">📸</div>
+                  <h3 class="text-xl font-bold text-gray-600 mb-2 font-serif">
+                    Photo Caption Generator
+                  </h3>
+                  <p class="text-gray-500 mb-4">
+                    AI-powered caption suggestions based on photo content
+                  </p>
+                  <button
+                    disabled
+                    class="bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold cursor-not-allowed"
+                  >
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+              <!-- Bulk Caption Processor -->
+              <div class="bg-white rounded-xl shadow-lg border-4 border-gray-300 p-6 opacity-75">
+                <div class="text-center">
+                  <div class="text-4xl mb-3">📋</div>
+                  <h3 class="text-xl font-bold text-gray-600 mb-2 font-serif">
+                    Bulk Caption Processor
+                  </h3>
+                  <p class="text-gray-500 mb-4">Process multiple captions at once for efficiency</p>
+                  <button
+                    disabled
+                    class="bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold cursor-not-allowed"
+                  >
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+              <!-- Style Guide Checker -->
+              <div class="bg-white rounded-xl shadow-lg border-4 border-gray-300 p-6 opacity-75">
+                <div class="text-center">
+                  <div class="text-4xl mb-3">📖</div>
+                  <h3 class="text-xl font-bold text-gray-600 mb-2 font-serif">Style Guide Checker</h3>
+                  <p class="text-gray-500 mb-4">
+                    Ensure consistency with your school's style guide
+                  </p>
+                  <button
+                    disabled
+                    class="bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold cursor-not-allowed"
+                  >
+                    Coming Soon
+                  </button>
                 </div>
               </div>
             </div>
-          <% end %>
+          </div>
         </div>
       </div>
     </Layouts.app>
