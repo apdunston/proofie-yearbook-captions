@@ -181,7 +181,7 @@ defmodule ProofieWeb.AlgorithmicCheckerLive do
 
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app flash={@flash}>
       <div class="min-h-screen p-8 bg-gradient-to-br from-amber-50 to-orange-100">
         <!-- Header -->
         <div class="text-center mb-8">
