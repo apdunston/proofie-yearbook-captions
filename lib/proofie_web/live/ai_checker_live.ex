@@ -29,6 +29,10 @@ defmodule ProofieWeb.AiCheckerLive do
     end
   end
 
+  def handle_event("update_caption", %{"caption" => caption}, socket) do
+    {:noreply, socket |> assign(:caption_text, caption)}
+  end
+
   def handle_event("clear_caption", _params, socket) do
     {:noreply,
      socket
