@@ -43,96 +43,12 @@ defmodule ProofieWeb.AiCheckerLive do
 
   def handle_info({:analyze_with_ai, caption}, socket) do
     # Simulate AI analysis (in real implementation, this would call an AI service)
-    feedback = simulate_ai_analysis(caption)
+    feedback = Proofie.OpenAIClient.analyze_caption(caption)
 
     {:noreply,
      socket
      |> assign(:ai_feedback, feedback)
      |> assign(:analyzing, false)}
-  end
-
-  defp simulate_ai_analysis(caption) do
-    # Simulate processing time
-    Process.sleep(1500)
-
-    # Generate AI-like feedback based on caption content
-    suggestions = []
-    strengths = []
-    issues = []
-
-    # Analyze tone and style
-    cond do
-      String.length(caption) < 10 ->
-        issues = issues ++ ["Caption is quite short - consider adding more descriptive details"]
-
-      String.length(caption) > 200 ->
-        issues = issues ++ ["Caption is lengthy - consider condensing for better readability"]
-
-      true ->
-        strengths = strengths ++ ["Good caption length for readability"]
-    end
-
-    # Check for active vs passive voice
-    if String.contains?(String.downcase(caption), ~w(is are was were been being)) do
-      suggestions =
-        suggestions ++ ["Consider using more active voice to make the caption more engaging"]
-    else
-      strengths = strengths ++ ["Good use of active voice"]
-    end
-
-    # Check for specific details
-    if String.match?(caption, ~r/\b(students?|people|everyone|they)\b/i) and
-         not String.match?(caption, ~r/\b[A-Z][a-z]+ [A-Z][a-z]+\b/) do
-      suggestions = suggestions ++ ["Consider including specific student names when possible"]
-    end
-
-    # Check for context
-    if not String.match?(caption, ~r/\b(during|while|at|in|for)\b/i) do
-      suggestions =
-        suggestions ++
-          ["Adding context about when or where this took place could improve the caption"]
-    else
-      strengths = strengths ++ ["Good contextual information provided"]
-    end
-
-    # Check for emotions/engagement
-    if String.match?(caption, ~r/\b(smil|laugh|enjoy|excit|celebrat|cheer)\b/i) do
-      strengths = strengths ++ ["Caption captures the emotional aspect of the moment"]
-    else
-      suggestions =
-        suggestions ++ ["Consider mentioning the mood or emotions visible in the photo"]
-    end
-
-    %{
-      overall_score: calculate_score(issues, suggestions, strengths),
-      strengths: strengths,
-      suggestions: suggestions,
-      issues: issues,
-      improved_version: generate_improved_version(caption)
-    }
-  end
-
-  defp calculate_score(issues, suggestions, strengths) do
-    base_score = 70
-    penalty = length(issues) * 15 + length(suggestions) * 5
-    bonus = length(strengths) * 10
-
-    max(10, min(100, base_score - penalty + bonus))
-  end
-
-  defp generate_improved_version(caption) do
-    # Simple improvement suggestions
-    improved =
-      caption
-      |> String.replace(~r/\bstudents?\b/i, "seniors")
-      |> String.replace(~r/\bpeople\b/i, "classmates")
-      |> String.replace(~r/\bare having fun\b/i, "celebrate together")
-
-    if improved == caption do
-      "#{String.trim_trailing(caption, ".")}#{if String.ends_with?(caption, "."), do: "", else: "."}"
-    else
-      improved
-    end
   end
 
   def render(assigns) do
