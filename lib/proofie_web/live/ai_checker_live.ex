@@ -45,7 +45,7 @@ defmodule ProofieWeb.AiCheckerLive do
   end
 
   def handle_info({:analyze_with_ai, caption}, socket) do
-    # Simulate AI analysis (in real implementation, this would call an AI service)
+    # Get the direct AI response text
     feedback = Proofie.OpenAIClient.analyze_caption(caption)
 
     {:noreply,
@@ -131,68 +131,25 @@ defmodule ProofieWeb.AiCheckerLive do
     <!-- Results Section -->
           <%= if @ai_feedback do %>
             <div class="bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 mb-6">
-              <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-bold text-blue-900 font-serif">AI Analysis Results</h2>
-                <div class="flex items-center">
-                  <span class="text-sm text-blue-800 mr-2">Overall Score:</span>
-                  <div class={[
-                    "px-3 py-1 rounded-full text-sm font-bold",
-                    cond do
-                      @ai_feedback.overall_score >= 80 -> "bg-green-100 text-green-800"
-                      @ai_feedback.overall_score >= 60 -> "bg-yellow-100 text-yellow-800"
-                      true -> "bg-red-100 text-red-800"
-                    end
-                  ]}>
-                    {@ai_feedback.overall_score}/100
+              <h2 class="text-2xl font-bold text-blue-900 mb-4 font-serif">AI Analysis Results</h2>
+
+              <div class={[
+                "p-6 rounded-lg border-2 text-lg font-serif",
+                if String.starts_with?(@ai_feedback, "Pass") do
+                  "bg-green-50 border-green-300 text-green-800"
+                else
+                  "bg-red-50 border-red-300 text-red-800"
+                end
+              ]}>
+                <div class="flex items-start">
+                  <span class="text-2xl mr-3">
+                    {if String.starts_with?(@ai_feedback, "Pass"), do: "✅", else: "❌"}
+                  </span>
+                  <div class="flex-1">
+                    <p>{@ai_feedback}</p>
                   </div>
                 </div>
               </div>
-              
-    <!-- Strengths -->
-              <%= if @ai_feedback.strengths != [] do %>
-                <div class="mb-4">
-                  <h3 class="text-lg font-bold text-green-700 mb-2">✅ Strengths</h3>
-                  <%= for strength <- @ai_feedback.strengths do %>
-                    <div class="bg-green-50 border-l-4 border-green-400 p-3 mb-2">
-                      <p class="text-green-800">{strength}</p>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-              
-    <!-- Issues -->
-              <%= if @ai_feedback.issues != [] do %>
-                <div class="mb-4">
-                  <h3 class="text-lg font-bold text-red-700 mb-2">❌ Issues to Address</h3>
-                  <%= for issue <- @ai_feedback.issues do %>
-                    <div class="bg-red-50 border-l-4 border-red-400 p-3 mb-2">
-                      <p class="text-red-800">{issue}</p>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-              
-    <!-- Suggestions -->
-              <%= if @ai_feedback.suggestions != [] do %>
-                <div class="mb-4">
-                  <h3 class="text-lg font-bold text-blue-700 mb-2">💡 Suggestions for Improvement</h3>
-                  <%= for suggestion <- @ai_feedback.suggestions do %>
-                    <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mb-2">
-                      <p class="text-blue-800">{suggestion}</p>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-              
-    <!-- Improved Version -->
-              <%= if @ai_feedback.improved_version && @ai_feedback.improved_version != @caption_text do %>
-                <div>
-                  <h3 class="text-lg font-bold text-purple-700 mb-2">✨ Suggested Revision</h3>
-                  <div class="bg-purple-50 border-l-4 border-purple-400 p-4">
-                    <p class="text-purple-800 italic">"{@ai_feedback.improved_version}"</p>
-                  </div>
-                </div>
-              <% end %>
             </div>
           <% end %>
 
