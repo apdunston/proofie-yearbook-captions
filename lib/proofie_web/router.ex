@@ -21,6 +21,8 @@ defmodule ProofieWeb.Router do
     pipe_through :browser
 
     live "/", DashboardLive, :index
+    live "/tools/algorithmic-checker", AlgorithmicCheckerLive, :index
+    live "/tools/ai-checker", AiCheckerLive, :index
   end
 
   # Other scopes may use custom stacks.
