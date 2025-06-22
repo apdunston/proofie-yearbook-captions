@@ -67,12 +67,12 @@ defmodule ProofieWeb.DashboardLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash}>
-      <div class="min-h-screen p-8 bg-gradient-to-br from-amber-50 to-orange-100">
+      <div class="min-h-screen p-8 bg-gradient-to-br from-yellow-50 to-blue-100">
         <!-- Header with yearbook aesthetic -->
         <div class="text-center mb-12">
-          <div class="inline-block bg-white p-8 rounded-lg shadow-lg transform -rotate-1 border-4 border-amber-200">
-            <h1 class="text-5xl font-bold text-amber-800 mb-2 font-serif">Proofie</h1>
-            <p class="text-xl text-amber-700 italic">Yearbook Caption Analysis Tools</p>
+          <div class="inline-block bg-white p-8 rounded-lg shadow-lg transform -rotate-1 border-4 border-yellow-400">
+            <h1 class="text-5xl font-bold text-blue-900 mb-2 font-serif">Proofie</h1>
+            <p class="text-xl text-blue-800 italic">Yearbook Caption Analysis Tools</p>
           </div>
         </div>
         
@@ -82,14 +82,14 @@ defmodule ProofieWeb.DashboardLive do
     <!-- Active Tools -->
           <%= for tool <- @active_tools do %>
             <div
-              class="bg-gradient-to-br from-white to-amber-50 border-4 border-amber-300 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+              class="bg-gradient-to-br from-white to-amber-50 border-4 border-yellow-500 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
               phx-click="navigate_to_tool"
               phx-value-route={tool.route}
             >
               <div class="text-center">
                 <div class="text-4xl mb-4">{tool.icon}</div>
-                <h3 class="text-xl font-bold text-amber-800 mb-2 font-serif">{tool.name}</h3>
-                <p class="text-amber-700 mb-4">{tool.description}</p>
+                <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">{tool.name}</h3>
+                <p class="text-blue-800 mb-4">{tool.description}</p>
                 <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
                   Active
                 </div>
