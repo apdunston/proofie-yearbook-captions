@@ -20,7 +20,7 @@ defmodule ProofieWeb.Router do
   scope "/", ProofieWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", DashboardLive, :index
   end
 
   # Other scopes may use custom stacks.
