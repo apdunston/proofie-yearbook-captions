@@ -73,7 +73,6 @@ config :logger, :default_formatter,
 # Configure OpenAI\
 config :proofie, :openai,
   api_key: System.get_env("OPENAI_API_KEY"),
-  organization: System.get_env("OPENAI_ORGANIZATION"),
   model: "gpt-3.5-turbo"
 
 # Use Jason for JSON parsing in Phoenix
