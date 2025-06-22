@@ -138,27 +138,27 @@ defmodule ProofieWeb.AiCheckerLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash}>
-      <div class="min-h-screen p-8 bg-gradient-to-br from-amber-50 to-orange-100">
+      <div class="min-h-screen p-8 bg-gradient-to-br from-yellow-50 to-blue-100">
         <!-- Header -->
         <div class="text-center mb-8">
-          <div class="inline-block bg-white p-6 rounded-lg shadow-lg transform rotate-1 border-4 border-amber-200">
-            <h1 class="text-4xl font-bold text-amber-800 mb-2 font-serif">
+          <div class="inline-block bg-white p-6 rounded-lg shadow-lg transform rotate-1 border-4 border-yellow-400">
+            <h1 class="text-4xl font-bold text-blue-900 mb-2 font-serif">
               🤖 AI Caption Checker
             </h1>
-            <p class="text-lg text-amber-700">Smart AI-powered style and content analysis</p>
+            <p class="text-lg text-blue-800">Smart AI-powered style and content analysis</p>
           </div>
         </div>
 
         <div class="max-w-4xl mx-auto">
           <!-- Input Section -->
-          <div class="bg-white rounded-xl shadow-lg border-4 border-amber-200 p-6 mb-6">
-            <h2 class="text-2xl font-bold text-amber-800 mb-4 font-serif">Enter Your Caption</h2>
+          <div class="bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 mb-6">
+            <h2 class="text-2xl font-bold text-blue-900 mb-4 font-serif">Enter Your Caption</h2>
             <form phx-submit="analyze_caption" phx-change="update_caption">
               <textarea
                 name="caption"
                 value={@caption_text}
                 placeholder="Paste your yearbook caption here for AI analysis..."
-                class="w-full h-32 p-4 border-2 border-amber-200 rounded-lg focus:border-amber-400 focus:ring focus:ring-amber-200 resize-none font-serif text-amber-900 bg-amber-50"
+                class="w-full h-32 p-4 border-2 border-yellow-400 rounded-lg focus:border-yellow-500 focus:ring focus:ring-yellow-200 resize-none font-serif text-amber-900 bg-yellow-50"
               ></textarea>
               <div class="mt-4 flex justify-between items-center">
                 <div class="flex gap-2">
@@ -201,7 +201,7 @@ defmodule ProofieWeb.AiCheckerLive do
                     Clear
                   </button>
                 </div>
-                <span class="text-amber-700">
+                <span class="text-blue-800">
                   {String.length(@caption_text)} characters
                 </span>
               </div>
@@ -210,11 +210,11 @@ defmodule ProofieWeb.AiCheckerLive do
           
     <!-- Results Section -->
           <%= if @ai_feedback do %>
-            <div class="bg-white rounded-xl shadow-lg border-4 border-amber-200 p-6 mb-6">
+            <div class="bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 mb-6">
               <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-bold text-amber-800 font-serif">AI Analysis Results</h2>
+                <h2 class="text-2xl font-bold text-blue-900 font-serif">AI Analysis Results</h2>
                 <div class="flex items-center">
-                  <span class="text-sm text-amber-700 mr-2">Overall Score:</span>
+                  <span class="text-sm text-blue-800 mr-2">Overall Score:</span>
                   <div class={[
                     "px-3 py-1 rounded-full text-sm font-bold",
                     cond do
@@ -277,9 +277,9 @@ defmodule ProofieWeb.AiCheckerLive do
           <% end %>
 
           <%= if @caption_text != "" and @ai_feedback == nil and not @analyzing do %>
-            <div class="bg-white rounded-xl shadow-lg border-4 border-amber-200 p-6 mb-6">
+            <div class="bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 mb-6">
               <div class="text-center py-8">
-                <p class="text-amber-600 text-lg">
+                <p class="text-blue-700 text-lg">
                   Click "Analyze with AI" to get intelligent feedback on your caption
                 </p>
               </div>
@@ -290,7 +290,7 @@ defmodule ProofieWeb.AiCheckerLive do
           <div class="text-center mt-8">
             <.link
               navigate="/"
-              class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
+              class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
             >
               ← Back to Dashboard
             </.link>
