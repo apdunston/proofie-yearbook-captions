@@ -101,7 +101,7 @@ defmodule Proofie.OpenAIClient do
   def analyze_caption(caption) when is_binary(caption) do
     config = Application.get_env(:proofie, :openai, [])
     api_key = Keyword.get(config, :api_key)
-    model = Keyword.get(config, :model, "gpt-3.5-turbo")
+    model = Keyword.get(config, :model, "gpt-4.1")
 
     if is_nil(api_key) or api_key == "" do
       Logger.warning("OpenAI API key not configured, falling back to simulation")
@@ -136,7 +136,6 @@ defmodule Proofie.OpenAIClient do
           content: caption
         }
       ],
-      temperature: 0.3,
       max_tokens: 800
     }
 
