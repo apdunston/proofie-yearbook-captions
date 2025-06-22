@@ -153,7 +153,7 @@ defmodule ProofieWeb.AiCheckerLive do
           <!-- Input Section -->
           <div class="bg-white rounded-xl shadow-lg border-4 border-amber-200 p-6 mb-6">
             <h2 class="text-2xl font-bold text-amber-800 mb-4 font-serif">Enter Your Caption</h2>
-            <form phx-submit="analyze_caption">
+            <form phx-submit="analyze_caption" phx-change="update_caption">
               <textarea
                 name="caption"
                 value={@caption_text}
