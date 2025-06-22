@@ -39,7 +39,7 @@ defmodule ProofieWeb.DashboardLive do
               <!-- Caption Checker -->
               <div class="group bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-rotate-1">
                 <div class="text-center">
-                  <div class="text-4xl mb-3">🤖</div>
+                  <div class="text-4xl mb-3">🖼️</div>
                   <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">Caption Checker</h3>
                   <p class="text-blue-700 mb-4">
                     Intelligent AI-powered analysis for comprehensive caption feedback
