@@ -30,12 +30,6 @@ defmodule ProofieWeb.DashboardLive do
         </div>
 
         <div class="max-w-6xl mx-auto">
-          <!-- Active Tools -->
-          <div class="mb-12">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center font-serif">
-              🛠️ Active Tools
-            </h2>
-            <div class="grid md:grid-cols-1 gap-6 max-w-md mx-auto">
               <!-- Caption Checker -->
               <div class="group bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-rotate-1">
                 <div class="text-center">
