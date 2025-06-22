@@ -36,20 +36,20 @@ defmodule ProofieWeb.DashboardLive do
               🛠️ Active Tools
             </h2>
             <div class="grid md:grid-cols-1 gap-6 max-w-md mx-auto">
-              <!-- AI Caption Checker -->
+              <!-- Caption Checker -->
               <div class="group bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-rotate-1">
                 <div class="text-center">
                   <div class="text-4xl mb-3">🤖</div>
-                  <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">AI Caption Checker</h3>
+                  <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">Caption Checker</h3>
                   <p class="text-blue-700 mb-4">
-                    Intelligent analysis powered by GPT-4.1 for comprehensive caption feedback
+                    Intelligent AI-powered analysis for comprehensive caption feedback
                   </p>
                   <button
                     phx-click="navigate_to_tool"
                     phx-value-tool="ai-checker"
                     class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold group-hover:bg-yellow-500"
                   >
-                    Launch AI Checker
+                    Launch Caption Checker
                   </button>
                 </div>
               </div>
