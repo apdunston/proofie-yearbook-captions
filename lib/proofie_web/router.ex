@@ -52,7 +52,6 @@ defmodule ProofieWeb.Router do
       on_mount: [{ProofieWeb.UserAuth, :require_authenticated}] do
       live "/users/settings", UserLive.Settings, :edit
       live "/", DashboardLive, :index
-      live "/tools/algorithmic-checker", AlgorithmicCheckerLive, :index
       live "/tools/ai-checker", AiCheckerLive, :index
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
     end
