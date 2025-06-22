@@ -14,12 +14,12 @@
   prefersdark: false;
   color-scheme: "light";
   --color-base-100: oklch(98% 0 0);
-  --color-primary: oklch(70% 0.213 47.604);
-  --color-secondary: oklch(65% 0.15 195.319);
-  --color-accent: oklch(75% 0.18 85.32);
-  --color-neutral: oklch(35% 0.05 264.84);
-  --color-base-200: oklch(95% 0.01 47.604);
-  --color-base-300: oklch(91% 0.02 47.604);
+  --color-primary: oklch(75% 0.15 85);
+  --color-secondary: oklch(45% 0.18 240);
+  --color-accent: oklch(80% 0.12 75);
+  --color-neutral: oklch(25% 0.08 240);
+  --color-base-200: oklch(95% 0.01 85);
+  --color-base-300: oklch(91% 0.02 85);
   --color-info: oklch(70% 0.15 240);
   --color-success: oklch(70% 0.15 160);
   --color-warning: oklch(80% 0.15 60);
@@ -38,7 +38,7 @@
 /* Custom Yearbook Enhancements */
 body {
   font-family: "Georgia", "Times New Roman", serif;
-  background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc6 100%);
+  background: linear-gradient(135deg, #fefbf3 0%, #f8f0d4 100%);
   min-height: 100vh;
   position: relative;
 }
@@ -54,17 +54,17 @@ body::before {
   background-image:
     radial-gradient(
       circle at 20% 20%,
-      rgba(139, 69, 19, 0.05) 2px,
+      rgba(25, 25, 112, 0.05) 2px,
       transparent 2px
     ),
     radial-gradient(
       circle at 80% 80%,
-      rgba(160, 82, 45, 0.05) 2px,
+      rgba(255, 215, 0, 0.05) 2px,
       transparent 2px
     ),
     radial-gradient(
       circle at 40% 60%,
-      rgba(205, 133, 63, 0.03) 1px,
+      rgba(184, 134, 11, 0.03) 1px,
       transparent 1px
     );
   background-size:
@@ -77,8 +77,8 @@ body::before {
 
 /* Enhanced polaroid-style cards */
 .polaroid-card {
-  background: linear-gradient(145deg, #ffffff, #f8f5f0);
-  border: 3px solid #d4af37;
+  background: linear-gradient(145deg, #ffffff, #fefbf3);
+  border: 3px solid #fbbf24;
   border-radius: 15px;
   box-shadow:
     0 8px 25px rgba(0, 0, 0, 0.15),
@@ -94,7 +94,7 @@ body::before {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, #d4af37, #f4e4bc, #d4af37);
+  background: linear-gradient(45deg, #fbbf24, #fde047, #fbbf24);
   border-radius: 18px;
   z-index: -1;
   opacity: 0.7;
@@ -113,11 +113,11 @@ body::before {
   padding: 20px 20px 60px 20px;
   box-shadow:
     0 8px 25px rgba(0, 0, 0, 0.15),
-    inset 0 0 20px rgba(139, 69, 19, 0.1);
+    inset 0 0 20px rgba(25, 25, 112, 0.1);
   transform: rotate(-1deg);
   margin: 20px;
   position: relative;
-  border: 1px solid #e8dcc6;
+  border: 1px solid #f8f0d4;
 }
 
 .photo-frame:nth-child(even) {
@@ -131,15 +131,15 @@ body::before {
   right: 10px;
   width: 40px;
   height: 20px;
-  background: rgba(139, 69, 19, 0.1);
+  background: rgba(25, 25, 112, 0.1);
   border-radius: 0 0 5px 0;
   transform: skew(-10deg);
 }
 
 /* Enhanced tool tiles */
 .tool-tile {
-  background: linear-gradient(145deg, #ffffff, #f8f5f0);
-  border: 4px solid #d4af37;
+  background: linear-gradient(145deg, #ffffff, #fefbf3);
+  border: 4px solid #fbbf24;
   border-radius: 20px;
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.15),
@@ -177,13 +177,13 @@ body::before {
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.25),
     inset 0 2px 0 rgba(255, 255, 255, 0.9);
-  border-color: #e6c76f;
+  border-color: #fde047;
 }
 
 .tool-tile.coming-soon {
   opacity: 0.7;
   background: linear-gradient(145deg, #f0f0f0, #e8e8e8);
-  border-color: #999;
+  border-color: #6b7280;
 }
 
 .tool-tile.coming-soon:hover {
@@ -197,11 +197,11 @@ body::before {
     linear-gradient(
       90deg,
       transparent 79px,
-      #d4af37 79px,
-      #d4af37 81px,
+      #fbbf24 79px,
+      #fbbf24 81px,
       transparent 81px
     ),
-    linear-gradient(#f8f5f0 0px, #f8f5f0 24px, #e8dcc6 25px);
+    linear-gradient(#fefbf3 0px, #fefbf3 24px, #f8f0d4 25px);
   background-size: 100% 25px;
   position: relative;
 }
@@ -216,12 +216,12 @@ body::before {
   background-image:
     radial-gradient(
       circle at 10% 20%,
-      rgba(139, 69, 19, 0.02) 1px,
+      rgba(25, 25, 112, 0.02) 1px,
       transparent 1px
     ),
     radial-gradient(
       circle at 90% 80%,
-      rgba(160, 82, 45, 0.02) 1px,
+      rgba(255, 215, 0, 0.02) 1px,
       transparent 1px
     );
   background-size:
@@ -234,7 +234,7 @@ body::before {
 .yearbook-heading {
   font-family: "Georgia", serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(135deg, #8b4513, #d2691e);
+  background: linear-gradient(135deg, #1e3a8a, #3730a3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -248,7 +248,7 @@ body::before {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
   border-radius: 1px;
 }
 
@@ -269,21 +269,21 @@ body::before {
 
 /* Enhanced form styling */
 .yearbook-input {
-  background: linear-gradient(145deg, #fff, #f8f5f0);
-  border: 2px solid #d4af37;
+  background: linear-gradient(145deg, #fff, #fefbf3);
+  border: 2px solid #fbbf24;
   border-radius: 12px;
   box-shadow:
     inset 2px 2px 5px rgba(0, 0, 0, 0.1),
-    0 2px 5px rgba(212, 175, 55, 0.2);
+    0 2px 5px rgba(251, 191, 36, 0.2);
   transition: all 0.3s ease;
   font-family: "Georgia", serif;
 }
 
 .yearbook-input:focus {
-  border-color: #e6c76f;
+  border-color: #fde047;
   box-shadow:
     inset 2px 2px 5px rgba(0, 0, 0, 0.1),
-    0 0 15px rgba(212, 175, 55, 0.3);
+    0 0 15px rgba(251, 191, 36, 0.3);
   background: #fff;
 }
 
@@ -299,7 +299,7 @@ body::before {
   right: 20px;
   width: 60px;
   height: 15px;
-  background: #d4af37;
+  background: #fbbf24;
   border-radius: 8px 8px 0 0;
   box-shadow:
     inset 0 2px 4px rgba(0, 0, 0, 0.1),
@@ -308,8 +308,8 @@ body::before {
 
 /* Vintage button styling */
 .vintage-button {
-  background: linear-gradient(145deg, #d4af37, #b8941f);
-  border: 2px solid #8b7419;
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
+  border: 2px solid #d97706;
   border-radius: 12px;
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.2),
