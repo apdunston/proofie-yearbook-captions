@@ -12,6 +12,9 @@ defmodule ProofieWeb.AiCheckerLive do
 
   def handle_event("analyze_caption", %{"caption" => caption}, socket) do
     if String.trim(caption) == "" do
+      # Start analysis
+      send(self(), {:analyze_with_ai, caption})
+
       {:noreply,
        socket
        |> assign(:caption_text, caption)
