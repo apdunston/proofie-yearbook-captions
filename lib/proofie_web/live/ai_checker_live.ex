@@ -62,7 +62,7 @@ defmodule ProofieWeb.AiCheckerLive do
         <div class="text-center mb-8">
           <div class="inline-block bg-white p-6 rounded-lg shadow-lg transform rotate-1 border-4 border-yellow-400">
             <h1 class="text-4xl font-bold text-blue-900 mb-2 font-serif">
-              🤖 Caption Checker
+              🖼️ Caption Checker
             </h1>
             <p class="text-lg text-blue-800">Smart AI-powered style and content analysis</p>
           </div>
