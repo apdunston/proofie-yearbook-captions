@@ -73,11 +73,13 @@ defmodule ProofieWeb.AiCheckerLive do
           <div class="bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 mb-6">
             <h2 class="text-2xl font-bold text-blue-900 mb-4 font-serif">Enter Your Caption</h2>
             <form phx-submit="analyze_caption" phx-change="update_caption">
-              <textarea
+              <input
+                type="text"
                 name="caption"
-                placeholder="Paste your yearbook caption here for AI analysis..."
-                class="w-full h-32 p-4 border-2 border-yellow-400 rounded-lg focus:border-yellow-500 focus:ring focus:ring-yellow-200 resize-none font-serif text-amber-900 bg-yellow-50"
-              >{@caption_text}</textarea>
+                value={@caption_text}
+                placeholder="Type your yearbook caption here and press Enter to analyze..."
+                class="w-full p-4 border-2 border-yellow-400 rounded-lg focus:border-yellow-500 focus:ring focus:ring-yellow-200 font-serif text-amber-900 bg-yellow-50"
+              />
               <div class="mt-4 flex justify-between items-center">
                 <div class="flex gap-2">
                   <button
