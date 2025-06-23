@@ -24,10 +24,6 @@ console_command = "/app/bin/proofie remote"
   min_machines_running = 0
   processes = ["app"]
 
-[[http_service.concurrency]]
-  type = "connections"
-  hard_limit = 1000
-  soft_limit = 1000
 
 [machine]
   memory = "1gb"
