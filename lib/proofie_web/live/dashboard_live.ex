@@ -30,22 +30,22 @@ defmodule ProofieWeb.DashboardLive do
         </div>
 
         <div class="max-w-6xl mx-auto">
-              <!-- Caption Checker -->
-              <div class="group bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-rotate-1">
-                <div class="text-center">
-                  <div class="text-4xl mb-3">🖼️</div>
-                  <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">Caption Checker</h3>
-                  <p class="text-blue-700 mb-4">
-                    Intelligent AI-powered analysis for comprehensive caption feedback
-                  </p>
-                  <button
-                    phx-click="navigate_to_tool"
-                    phx-value-tool="ai-checker"
-                    class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold group-hover:bg-yellow-500"
-                  >
-                    Launch Caption Checker
-                  </button>
-                </div>
+          <!-- Active Tools -->
+          <div class="mb-12">
+            <div class="group bg-white rounded-xl shadow-lg border-4 border-yellow-400 p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-rotate-1">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🖼️</div>
+                <h3 class="text-xl font-bold text-blue-900 mb-2 font-serif">Caption Checker</h3>
+                <p class="text-blue-700 mb-4">
+                  Intelligent AI-powered analysis for comprehensive caption feedback
+                </p>
+                <button
+                  phx-click="navigate_to_tool"
+                  phx-value-tool="ai-checker"
+                  class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold group-hover:bg-yellow-500"
+                >
+                  Launch Caption Checker
+                </button>
               </div>
             </div>
           </div>
@@ -74,7 +74,8 @@ defmodule ProofieWeb.DashboardLive do
                   </button>
                 </div>
               </div>
-              <!-- Bulk Caption Processor -->
+              
+    <!-- Bulk Caption Processor -->
               <div class="bg-white rounded-xl shadow-lg border-4 border-gray-300 p-6 opacity-75">
                 <div class="text-center">
                   <div class="text-4xl mb-3">📋</div>
@@ -90,7 +91,8 @@ defmodule ProofieWeb.DashboardLive do
                   </button>
                 </div>
               </div>
-              <!-- Style Guide Checker -->
+              
+    <!-- Style Guide Checker -->
               <div class="bg-white rounded-xl shadow-lg border-4 border-gray-300 p-6 opacity-75">
                 <div class="text-center">
                   <div class="text-4xl mb-3">📖</div>
