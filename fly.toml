@@ -1,0 +1,65 @@
+# fly.toml app configuration file generated for proofie-app on 2024-06-23T01:29:00Z
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+
+app = "proofie-app"
+primary_region = "ord"
+console_command = "/app/bin/proofie remote"
+
+[build]
+
+[deploy]
+  release_command = "/app/bin/migrate"
+
+[env]
+  DATABASE_URL = "ecto://user:pass@top1.nearest.of.db.sqlite.local/db"
+  PHX_HOST = "proofie-app.fly.dev"
+  PORT = "8080"
+  SECRET_KEY_BASE = "generate_this_on_deploy"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.concurrency]]
+  type = "connections"
+  hard_limit = 1000
+  soft_limit = 1000
+
+[machine]
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[[mounts]]
+  source = "proofie_data"
+  destination = "/data"
+
+[processes]
+  app = "/app/bin/server"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.tcp_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "1s"
