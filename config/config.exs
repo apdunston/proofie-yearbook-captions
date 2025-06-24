@@ -74,6 +74,10 @@ config :proofie, :enveloop,
   api_key: System.get_env("ENVELOOP_LIVE_API_KEY"),
   default_template_id: System.get_env("ENVELOOP_TEMPLATE_ID")
 
+config :proofie, :openai,
+  api_key: System.get_env("OPENAI_API_KEY"),
+  model: "gpt-4"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
