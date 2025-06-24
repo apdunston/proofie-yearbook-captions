@@ -70,9 +70,15 @@ config :logger, :default_formatter,
   metadata: [:request_id]
 
 # Configure Enveloop email service\
-config :proofie, :enveloop,
-  api_key: System.get_env("ENVELOOP_LIVE_API_KEY"),
-  default_template_id: System.get_env("ENVELOOP_TEMPLATE_ID")
+#config :proofie, :enveloop,
+#  api_key: System.get_env("ENVELOOP_LIVE_API_KEY"),
+#  template: System.get_env("ENVELOOP_TEMPLATE_ID")
+
+config :proofie, Proofie.Mailer,
+  adapter: Proofie.EnveloopAdapter,
+  api_key: System.get_env("ENVELOOP_SANDBOX_API_KEY"),
+  template: System.get_env("ENVELOOP_TEMPLATE_ID")
+
 
 config :proofie, :openai,
   api_key: System.get_env("OPENAI_API_KEY"),

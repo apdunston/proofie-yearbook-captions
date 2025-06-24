@@ -82,7 +82,8 @@ config :phoenix_live_view,
 # Configure mailer for development
 config :proofie, Proofie.Mailer,
   adapter: Proofie.EnveloopAdapter,
-  api_key: System.get_env("ENVELOOP_SANDBOX_API_KEY") || System.get_env("ENVELOOP_LIVE_API_KEY")
+  api_key: System.get_env("ENVELOOP_SANDBOX_API_KEY"),
+  template: System.get_env("ENVELOOP_TEMPLATE_ID")
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false

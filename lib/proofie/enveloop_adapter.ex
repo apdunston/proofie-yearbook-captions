@@ -14,24 +14,18 @@ defmodule Proofie.EnveloopAdapter do
 
   @impl Swoosh.Adapter
   def deliver(%Email{} = email, config \\ []) do
-    api_key = config[:api_key] || get_api_key()
+    api_key = config[:api_key] || Application.get_env(:proofie, Proofie.Mailer)[:api_key]
+    template = Application.get_env(:proofie, Proofie.Mailer)[:template]
 
     if is_nil(api_key) do
       Logger.error("Enveloop API key not configured")
       {:error, "Enveloop API key not configured"}
     else
-      send_email(email, api_key)
+      send_email(email, api_key, template)
     end
   end
 
-  defp get_api_key do
-    case Application.get_env(:proofie, Proofie.Mailer) do
-      nil -> nil
-      config -> config[:api_key]
-    end
-  end
-
-  defp send_email(email, api_key) do
+  defp send_email(email, api_key, template) do
     headers = [
       {"Authorization", "Bearer #{api_key}"},
       {"Content-Type", "application/json"}
@@ -44,7 +38,8 @@ defmodule Proofie.EnveloopAdapter do
         "from" => format_sender(email.from),
         "subject" => email.subject,
         "text" => email.text_body,
-        "html" => email.html_body
+        "html" => email.html_body,
+        "template" => template
       }
       |> remove_nil_values()
 

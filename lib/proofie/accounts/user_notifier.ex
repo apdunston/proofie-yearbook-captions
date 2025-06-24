@@ -9,7 +9,7 @@ defmodule Proofie.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Proofie", "contact@example.com"})
+      |> from({"Proofie", "adrian@x-omega.com"})
       |> subject(subject)
       |> text_body(body)
 

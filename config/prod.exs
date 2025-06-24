@@ -18,3 +18,8 @@ config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
+
+config :proofie, Proofie.Mailer,
+  adapter: Proofie.EnveloopAdapter,
+  api_key: System.get_env("ENVELOOP_LIVE_API_KEY"),
+  template: System.get_env("ENVELOOP_TEMPLATE_ID")
