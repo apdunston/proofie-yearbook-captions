@@ -110,4 +110,15 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  # Configure Enveloop email service
+  config :proofie, :enveloop,
+    api_key:
+      System.get_env("ENVELOOP_LIVE_API_KEY") || System.get_env("ENVELOOP_SANDBOX_API_KEY"),
+    default_template_id: System.get_env("ENVELOOP_TEMPLATE_ID")
+
+  # Configure OpenAI for AI caption analysis
+  config :proofie, :openai,
+    api_key: System.get_env("OPENAI_API_KEY"),
+    model: "gpt-4"
 end
