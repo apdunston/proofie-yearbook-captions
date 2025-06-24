@@ -79,5 +79,10 @@ config :phoenix_live_view,
   # Enable helpful, but potentially expensive runtime checks
   enable_expensive_runtime_checks: true
 
+# Configure mailer for development
+config :proofie, Proofie.Mailer,
+  adapter: Proofie.EnveloopAdapter,
+  api_key: System.get_env("ENVELOOP_SANDBOX_API_KEY") || System.get_env("ENVELOOP_LIVE_API_KEY")
+
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
