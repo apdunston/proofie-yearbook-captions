@@ -72,7 +72,7 @@ config :logger, :default_formatter,
 
 # Configure Enveloop email service\
 config :proofie, :enveloop,
-  api_key: System.get_env("ENVELOOP_API_KEY"),
+  api_key: System.get_env("ENVELOOP_LIVE_API_KEY"),
   default_template_id: System.get_env("ENVELOOP_TEMPLATE_ID")
 
 # Configure OpenAI\
