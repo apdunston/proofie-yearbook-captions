@@ -11,35 +11,44 @@ defmodule Proofie.EnveloopAdapter do
   require Logger
 
   @base_url "https://api.enveloop.com"
-  @api_version "v1"
 
   @impl Swoosh.Adapter
   def deliver(%Email{} = email, config \\ []) do
-    api_key = config[:api_key] || Application.get_env(:proofie, :enveloop)[:api_key]
-    template_id = config[:template_id] || get_template_id(email)
+    api_key = config[:api_key] || get_api_key()
 
     if is_nil(api_key) do
       Logger.error("Enveloop API key not configured")
       {:error, "Enveloop API key not configured"}
     else
-      send_email(email, api_key, template_id)
+      send_email(email, api_key)
     end
   end
 
-  defp send_email(email, api_key, template_id) do
+  defp get_api_key do
+    case Application.get_env(:proofie, Proofie.Mailer) do
+      nil -> nil
+      config -> config[:api_key]
+    end
+  end
+
+  defp send_email(email, api_key) do
     headers = [
       {"Authorization", "Bearer #{api_key}"},
       {"Content-Type", "application/json"}
     ]
 
-    body = %{
-      template_id: template_id,
-      to: build_recipients(email.to),
-      from: build_sender(email.from),
-      variables: build_variables(email)
-    }
+    # Build simple payload that matches Enveloop's API
+    body =
+      %{
+        "to" => format_recipients(email.to),
+        "from" => format_sender(email.from),
+        "subject" => email.subject,
+        "text" => email.text_body,
+        "html" => email.html_body
+      }
+      |> remove_nil_values()
 
-    case Req.post("#{@base_url}/#{@api_version}/messages",
+    case Req.post("#{@base_url}/messages",
            headers: headers,
            json: body
          ) do
@@ -57,58 +66,55 @@ defmodule Proofie.EnveloopAdapter do
     end
   end
 
-  defp build_recipients(recipients) when is_list(recipients) do
-    Enum.map(recipients, &build_recipient/1)
+  defp format_recipients(recipients) when is_list(recipients) do
+    recipients
+    |> Enum.map(&format_single_recipient/1)
+    |> Enum.join(",")
   end
 
-  defp build_recipients(recipient), do: [build_recipient(recipient)]
+  defp format_recipients(recipient), do: format_single_recipient(recipient)
 
-  defp build_recipient({email, name}) when is_binary(email) and is_binary(name) do
-    %{email: email, name: name}
+  defp format_single_recipient({email, name}) when is_binary(email) and is_binary(name) do
+    "#{name} <#{email}>"
   end
 
-  defp build_recipient({email, _}) when is_binary(email) do
-    %{email: email}
+  defp format_single_recipient({email, _}) when is_binary(email) do
+    email
   end
 
-  defp build_recipient(email) when is_binary(email) do
-    %{email: email}
+  defp format_single_recipient(email) when is_binary(email) do
+    email
   end
 
-  defp build_sender({email, name}) when is_binary(email) and is_binary(name) do
-    %{email: email, name: name}
+  defp format_sender({email, name}) when is_binary(email) and is_binary(name) do
+    "#{name} <#{email}>"
   end
 
-  defp build_sender({email, _}) when is_binary(email) do
-    %{email: email}
+  defp format_sender({email, _}) when is_binary(email) do
+    email
   end
 
-  defp build_sender(email) when is_binary(email) do
-    %{email: email}
+  defp format_sender(email) when is_binary(email) do
+    email
   end
 
-  defp build_variables(email) do
-    %{
-      subject: email.subject,
-      html_body: email.html_body,
-      text_body: email.text_body
-    }
-    |> add_custom_variables(email)
+  defp remove_nil_values(map) do
+    map
+    |> Enum.reject(fn {_key, value} -> is_nil(value) end)
+    |> Enum.into(%{})
   end
 
-  defp add_custom_variables(variables, email) do
-    case Map.get(email.private, :enveloop_variables) do
-      nil -> variables
-      custom_vars when is_map(custom_vars) -> Map.merge(variables, custom_vars)
-      _ -> variables
+  @impl Swoosh.Adapter
+  def validate_config(config) do
+    if config[:api_key] do
+      :ok
+    else
+      {:error, "Enveloop API key is required"}
     end
   end
 
-  defp get_template_id(email) do
-    # Check if template_id is set in email private data
-    case Map.get(email.private, :enveloop_template_id) do
-      nil -> Application.get_env(:proofie, :enveloop)[:default_template_id]
-      template_id -> template_id
-    end
+  @impl Swoosh.Adapter
+  def validate_dependency do
+    :ok
   end
 end
