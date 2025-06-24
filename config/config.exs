@@ -42,7 +42,6 @@ config :proofie, ProofieWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :proofie, Proofie.Mailer, adapter: Proofie.EnveloopAdapter
 
 # Configure esbuild (the version is required)
 config :esbuild,
