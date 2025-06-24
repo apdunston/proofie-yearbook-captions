@@ -70,6 +70,11 @@ config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configure Enveloop email service\
+config :proofie, :enveloop,
+  api_key: System.get_env("ENVELOOP_API_KEY"),
+  default_template_id: System.get_env("ENVELOOP_TEMPLATE_ID")
+
 # Configure OpenAI\
 config :proofie, :openai,
   api_key: System.get_env("OPENAI_API_KEY"),
