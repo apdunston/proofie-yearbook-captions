@@ -139,4 +139,3 @@ fly status
 4. **Monitor logs** for any issues: `fly logs`
 
 Your Proofie app is now live! 🎉
-
