@@ -21,8 +21,13 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential wget git \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# Install litestream
+ARG LITESTREAM_VERSION=0.3.13
+RUN wget https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM_VERSION}/litestream-v${LITESTREAM_VERSION}-linux-amd64.deb \
+    && dpkg -i litestream-v${LITESTREAM_VERSION}-linux-amd64.deb
 
 # prepare build dir
 WORKDIR /app
@@ -86,6 +91,14 @@ ENV MIX_ENV="prod"
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/proofie ./
 
+# Copy Litestream binary from build stage
+COPY --from=builder /usr/bin/litestream /usr/bin/litestream
+COPY litestream.sh /app/bin/litestream.sh
+COPY config/litestream.yml /etc/litestream.yml
+
 USER nobody
+
+# Run litestream script as entrypoint
+ENTRYPOINT ["/bin/bash", "/app/bin/litestream.sh"]
 
 CMD ["/app/bin/server"]
