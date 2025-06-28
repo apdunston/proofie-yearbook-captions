@@ -16,16 +16,17 @@ defmodule Proofie.EnveloopAdapter do
   def deliver(%Email{} = email, config \\ []) do
     api_key = config[:api_key] || Application.get_env(:proofie, Proofie.Mailer)[:api_key]
     template = Application.get_env(:proofie, Proofie.Mailer)[:template]
+    url = "example.com"
 
     if is_nil(api_key) do
       Logger.error("Enveloop API key not configured")
       {:error, "Enveloop API key not configured"}
     else
-      send_email(email, api_key, template)
+      send_email(email, api_key, template, url)
     end
   end
 
-  defp send_email(email, api_key, template) do
+  defp send_email(email, api_key, template, url) do
     headers = [
       {"Authorization", "Bearer #{api_key}"},
       {"Content-Type", "application/json"}
@@ -39,9 +40,14 @@ defmodule Proofie.EnveloopAdapter do
         "subject" => email.subject,
         "text" => email.text_body,
         "html" => email.html_body,
-        "template" => template
+        "template" => template,
+        "account_url" => url,
+        "templateVariables" => %{
+          account_url: url,
+        },
       }
       |> remove_nil_values()
+      |> IO.inspect(label: "!!ADRIAN #{__ENV__.file}:#{__ENV__.line}", pretty: true)
 
     case Req.post("#{@base_url}/messages",
            headers: headers,
@@ -81,7 +87,7 @@ defmodule Proofie.EnveloopAdapter do
     email
   end
 
-  defp format_sender({email, name}) when is_binary(email) and is_binary(name) do
+  defp format_sender({name, email}) when is_binary(email) and is_binary(name) do
     "#{name} <#{email}>"
   end
 
@@ -97,19 +103,5 @@ defmodule Proofie.EnveloopAdapter do
     map
     |> Enum.reject(fn {_key, value} -> is_nil(value) end)
     |> Enum.into(%{})
-  end
-
-  @impl Swoosh.Adapter
-  def validate_config(config) do
-    if config[:api_key] do
-      :ok
-    else
-      {:error, "Enveloop API key is required"}
-    end
-  end
-
-  @impl Swoosh.Adapter
-  def validate_dependency do
-    :ok
   end
 end
