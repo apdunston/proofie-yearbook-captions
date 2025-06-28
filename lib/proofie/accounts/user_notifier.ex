@@ -63,19 +63,16 @@ defmodule Proofie.Accounts.UserNotifier do
   end
 
   defp deliver_confirmation_instructions(user, url) do
-    deliver(user.email, "Confirmation instructions", """
+    email =
+      new()
+      |> to(user.email)
+      |> from({"Proofie", "adrian@x-omega.com"})
+      |> subject("Proofie Email Confirmation")
+      |> assign(:template, "confirm-account")
+      |> assign(:url, url)
 
-    ==============================
-
-    Hi #{user.email},
-
-    You can confirm your account by visiting the URL below:
-
-    #{url}
-
-    If you didn't create an account with us, please ignore this.
-
-    ==============================
-    """)
+    with {:ok, _metadata} <- Mailer.deliver(email) do
+      {:ok, email}
+    end
   end
 end
