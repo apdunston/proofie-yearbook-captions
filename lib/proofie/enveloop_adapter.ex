@@ -15,6 +15,7 @@ defmodule Proofie.EnveloopAdapter do
   @impl Swoosh.Adapter
   def deliver(%Email{} = email, config \\ []) do
     api_key = config[:api_key] || Application.get_env(:proofie, Proofie.Mailer)[:api_key]
+    Application.get_env(:proofie, Proofie.Mailer) |> IO.inspect(label: "!!ADRIAN #{__ENV__.file}:#{__ENV__.line}", pretty: true)
     email |> IO.inspect(label: "!!ADRIAN #{__ENV__.file}:#{__ENV__.line}", pretty: true)
 
     if is_nil(api_key) do

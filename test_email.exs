@@ -9,16 +9,11 @@ defmodule EmailTester do
 
     # Check for API keys
     sandbox_key = System.get_env("ENVELOOP_SANDBOX_API_KEY")
-    live_key = System.get_env("ENVELOOP_LIVE_API_KEY")
 
     cond do
       sandbox_key ->
         IO.puts("Found sandbox API key: #{String.slice(sandbox_key, 0, 10)}...")
         test_with_key(sandbox_key, "sandbox")
-
-      live_key ->
-        IO.puts("Found live API key: #{String.slice(live_key, 0, 10)}...")
-        test_with_key(live_key, "live")
 
       true ->
         IO.puts("❌ No Enveloop API keys found!")
