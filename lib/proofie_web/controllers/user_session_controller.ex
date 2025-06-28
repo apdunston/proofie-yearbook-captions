@@ -29,21 +29,11 @@ defmodule ProofieWeb.UserSessionController do
     end
   end
 
-  # email + password login
-  defp create(conn, %{"user" => user_params}, info) do
-    %{"email" => email, "password" => password} = user_params
-
-    if user = Accounts.get_user_by_email_and_password(email, password) do
-      conn
-      |> put_flash(:info, info)
-      |> UserAuth.log_in_user(user, user_params)
-    else
-      # In order to prevent user enumeration attacks, don't disclose whether the email is registered.
-      conn
-      |> put_flash(:error, "Invalid email or password")
-      |> put_flash(:email, String.slice(email, 0, 160))
-      |> redirect(to: ~p"/users/log-in")
-    end
+  # fallback for any other login attempts - redirect to magic link login
+  defp create(conn, _params, _info) do
+    conn
+    |> put_flash(:error, "Please use the magic link login.")
+    |> redirect(to: ~p"/users/log-in")
   end
 
   def update_password(conn, %{"user" => user_params} = params) do
