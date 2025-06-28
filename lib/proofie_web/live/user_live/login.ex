@@ -49,42 +49,7 @@ defmodule ProofieWeb.UserLive.Login do
             phx-mounted={JS.focus()}
           />
           <.button class="w-full" variant="primary">
-            Log in with email <span aria-hidden="true">→</span>
-          </.button>
-        </.form>
-
-        <div class="divider">or</div>
-
-        <.form
-          :let={f}
-          for={@form}
-          id="login_form_password"
-          action={~p"/users/log-in"}
-          phx-submit="submit_password"
-          phx-trigger-action={@trigger_submit}
-        >
-          <.input
-            readonly={!!@current_scope}
-            field={f[:email]}
-            type="email"
-            label="Email"
-            autocomplete="username"
-            required
-          />
-          <.input
-            field={@form[:password]}
-            type="password"
-            label="Password"
-            autocomplete="current-password"
-          />
-          <.input
-            :if={!@current_scope}
-            field={f[:remember_me]}
-            type="checkbox"
-            label="Keep me logged in"
-          />
-          <.button class="w-full" variant="primary">
-            Log in <span aria-hidden="true">→</span>
+            Send magic link <span aria-hidden="true">→</span>
           </.button>
         </.form>
       </div>
@@ -99,11 +64,7 @@ defmodule ProofieWeb.UserLive.Login do
 
     form = to_form(%{"email" => email}, as: "user")
 
-    {:ok, assign(socket, form: form, trigger_submit: false)}
-  end
-
-  def handle_event("submit_password", _params, socket) do
-    {:noreply, assign(socket, :trigger_submit, true)}
+    {:ok, assign(socket, form: form)}
   end
 
   def handle_event("submit_magic", %{"user" => %{"email" => email}}, socket) do
