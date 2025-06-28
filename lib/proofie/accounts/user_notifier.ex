@@ -49,20 +49,17 @@ defmodule Proofie.Accounts.UserNotifier do
   end
 
   defp deliver_magic_link_instructions(user, url) do
-    deliver(user.email, "Log in instructions", """
+    email =
+      new()
+      |> to(user.email)
+      |> from({"Proofie", "adrian@x-omega.com"})
+      |> subject("Proofie Magic Link")
+      |> assign(:template, "magic-link")
+      |> assign(:url, url)
 
-    ==============================
-
-    Hi #{user.email},
-
-    You can log into your account by visiting the URL below:
-
-    #{url}
-
-    If you didn't request this email, please ignore this.
-
-    ==============================
-    """)
+    with {:ok, _metadata} <- Mailer.deliver(email) do
+      {:ok, email}
+    end
   end
 
   defp deliver_confirmation_instructions(user, url) do
