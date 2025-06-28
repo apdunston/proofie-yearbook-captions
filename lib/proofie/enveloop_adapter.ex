@@ -14,9 +14,7 @@ defmodule Proofie.EnveloopAdapter do
 
   @impl Swoosh.Adapter
   def deliver(%Email{} = email, config \\ []) do
-    api_key = config[:api_key] || Application.get_env(:proofie, Proofie.Mailer)[:api_key]
-    System.get_env("ENVELOOP_LIVE_API_KEY") |> IO.inspect(label: "!!ADRIAN #{__ENV__.file}:#{__ENV__.line}", pretty: true)
-    email |> IO.inspect(label: "!!ADRIAN #{__ENV__.file}:#{__ENV__.line}", pretty: true)
+    api_key = System.get_env("ENVELOOP_LIVE_API_KEY")
 
     if is_nil(api_key) do
       Logger.error("Enveloop API key not configured")
@@ -46,7 +44,6 @@ defmodule Proofie.EnveloopAdapter do
         },
       }
       |> remove_nil_values()
-      |> IO.inspect(label: "!!ADRIAN #{__ENV__.file}:#{__ENV__.line}", pretty: true)
 
     case Req.post("#{@base_url}/messages",
            headers: headers,
